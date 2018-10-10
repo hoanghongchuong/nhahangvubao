@@ -1,4 +1,33 @@
 $(document).ready(function($){
+    $('.regis-sfrm').on('submit', function(){
+        var time = $('.time_book').val();
+        var date = $('.date_book').val();
+        var numb = $('.numb_book').val();
+        var phone = $('.phone_book').val();
+        var token = $('input[name="_token"]').val();
+       
+        $.ajax({
+            url: baseUrl() + '/dat-ban',
+            type: 'POST',
+            cache: false,
+            data: {
+                time: time,
+                date: date,
+                numb: numb,
+                phone: phone,
+                _token :token
+            },
+            success: function(res){
+                if(res == 1){
+                    // $('#info-modal').modal('show');
+                    $('#regis-modal').modal('hide');
+                }
+            }
+        });    
+    });
+
+
+
   $('#f2').flexslider({
         animation: "slide",
         controlNav: true,

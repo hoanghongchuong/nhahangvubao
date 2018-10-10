@@ -11,7 +11,7 @@ use DB,Cache,Mail, Session;
 use Cart;
 use App\Campaign;
 use App\Bill;
-use App\CampaignCard;
+use App\Book;
 use App\District;
 use App\ChiNhanh;
 class IndexController extends Controller {
@@ -33,7 +33,7 @@ class IndexController extends Controller {
 	 *
 	 * @return void
 	 */
-	public function __construct()
+	public function __construct(Book $book)
 	{
 		session_start();
     	$setting = DB::table('setting')->select()->where('id',1)->get()->first();
@@ -46,7 +46,7 @@ class IndexController extends Controller {
         Cache::forever('dichvu', $dichvu);
         Cache::forever('cateProducts', $cateProducts);
         Cache::forever('about', $about);
-        
+        $this->Book = $book;
         // Cache::forever('chinhanh', $chinhanh);
 	}
 
@@ -59,11 +59,10 @@ class IndexController extends Controller {
 	{
 		$productHot = DB::table('products')->where('status',1)->where('noibat',1)->take(8)->orderBy('stt','asc')->get();
 		$news = DB::table('news')->where('status',1)->where('noibat',1)->where('com','tin-tuc')->take(20)->orderBy('id','desc')->get();
-		$products = DB::table('products')->where('status',1)->take(20)->orderBy('id','desc')->get();
-		$categories = DB::table('product_categories')->where('status',1)->where('noibat',1)->take(4)->orderBy('stt','asc')->get();
-
-		$category = DB::table('product_categories')->where('status',1)->take(4)->orderBy('id','desc')->get();
-		// dd($category[0]);
+		$partners = DB::table('partner')->get();
+		$khonggian = DB::table('slider')->where('com','khong-gian')->take(4)->inRandomOrder()->get();
+		$about_khonggian = DB::table('about')->where('com', 'khong-gian')->first();
+		$customer = DB::table('feedback')->get();
 		$setting = Cache::get('setting');
 		$title = $setting->title;
 		$keyword = $setting->keyword;
@@ -71,7 +70,7 @@ class IndexController extends Controller {
 		$com = 'index';
 		// End cấu hình SEO
 		$img_share = asset('upload/hinhanh/'.$setting->photo);
-		return view('templates.index_tpl', compact('com','keyword','description','title','img_share','productHot','products','categories','category'));
+		return view('templates.index_tpl', compact('com','keyword','description','title','img_share','productHot','partners','about_khonggian','khonggian','customer'));
 	}
 	public function getProduct(Request $req)
 	{
@@ -679,5 +678,17 @@ class IndexController extends Controller {
 		return view('templates.banchay', compact('cate_pro', 'colors', 'products', 'price_from', 'price_to', 'viewx', 'sortx', 'colorx', 'appends'));
 	}
 
+	public function datBan(Request $req)
+	{
+		$request = $req->only($this->Book->getFieldList());
+		// dd($request);
+		if($request['time'] != null && $request['date'] != null && $request['numb'] != null && $request['phone'] != null){
+			$this->Book->create($request);
+			return 1;
+		}else{
+			return 0;
+		}
+		
+	}
 	
 }

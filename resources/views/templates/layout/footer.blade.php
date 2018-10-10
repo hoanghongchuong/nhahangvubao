@@ -32,7 +32,7 @@
                     <form action="{{ route('postNewsletter') }}" method="post" class="ft-frm">
                         {{csrf_field()}}
                         <label class="sr-only" for="regisemail">Email</label>
-                        <input id="regisemail" type="email" required="required" placeholder="Email" class="form-control">
+                        <input id="regisemail" name="txtEmail" type="email" required="required" placeholder="Email" class="form-control">
                         <button aria-label="Đăng ký" role="button" type="submit" class="btn text-uppercase"><i class="far fa-paper-plane"></i></button>
                     </form>
                     <div class="ft-map">

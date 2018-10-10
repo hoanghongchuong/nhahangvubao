@@ -22,6 +22,7 @@ Route::post('lien-he',['as'=>'postContact', 'uses'=>'ContactController@postConta
 // Ajax load more project
 Route::get('loadmore/project','IndexController@loadmoreProject')->name('loadmoreProject');
 
+Route::post('dat-ban', 'IndexController@datBan')->name('book.table');
 
 Route::get('khong-gian', 'IndexController@khonggian');
 

@@ -34,8 +34,8 @@
 	                  	<div class="tab-pane active" id="tab_1">
 	                  		<div class="row">
 		                  		<div class="col-md-6 col-xs-12">
-		                  			
-									<div class="form-group hidden @if ($errors->first('fImages')!='') has-error @endif">
+		                  			@if($_GET['type']=='gioi-thieu')
+									<div class="form-group @if ($errors->first('fImages')!='') has-error @endif">
 										<div class="form-group">
 											<img src="{{ asset('upload/hinhanh/'.$data->photo) }}" onerror="this.src='{{asset('public/admin_assets/images/no-image.jpg')}}'" class="img-responsive"  alt="NO PHOTO" />
 											<input type="hidden" name="img_current" value="{!! @$data->photo !!}">
@@ -47,7 +47,7 @@
 								      	<label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {!! $errors->first('fImages'); !!}</label>
 								      	@endif
 									</div>
-									
+									@endif
 									@if($_GET['type']=='gioi-thieu' || $_GET['type']=='khong-gian')
 							    	<div class="form-group">
 								      	<label for="ten">Tên</label>
@@ -70,8 +70,8 @@
 								</div>
 								<input type="hidden" name="txtCom" value="{{ old('txtCom', isset($data) ? @$data->com : null) }}">
 								<div class="clearfix"></div>
-								
-								<!-- <div class="col-md-12 col-xs-12">
+								@if($_GET['type']=='gioi-thieu' || $_GET['type']=='khong-gian')
+								<div class="col-md-12 col-xs-12">
 									<div class="box box-info">
 						                <div class="box-header">                                               
 						                  	<h3 class="box-title">Mô tả</h3>
@@ -84,7 +84,8 @@
 						        			<textarea name="txtDesc" id="txtContent" cols="50" rows="5">{{ @$data->mota }}</textarea>
 						        		</div>
 						        	</div>
-								</div> -->								
+								</div>
+								@endif								
 								<div class="col-md-12 col-xs-12">
 									<div class="box box-info">
 						                <div class="box-header">                                               

@@ -99,11 +99,11 @@
 					      <label for="ten">Số thứ tự</label>
 					      <input type="number" min="1" name="stt" value="{!! count($parent)+1 !!}" class="form-control" style="width: 100px;">
 				    </div>
-				    <!-- <div class="form-group">
+				    <div class="form-group">
 					    <label>
-				        	<input type="checkbox" name="noibat"> Nổi bật
+				        	<input type="checkbox" name="noibat"> Hiển trị trang chủ
 				    	</label>
-				    </div> -->
+				    </div>
 				    <div class="form-group">
 					    <label>
 				        	<input type="checkbox" name="status" checked="checked"> Hiển thị

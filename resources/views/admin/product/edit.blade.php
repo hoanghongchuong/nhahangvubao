@@ -27,7 +27,7 @@
 	                <ul class="nav nav-tabs">
 	                  	<li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="false">Thông tin chung</a></li>
 	                  	<li><a href="#tab_2" data-toggle="tab" aria-expanded="true">Nội dung</a></li>
-	                  	<li><a href="#tab_3" data-toggle="tab" aria-expanded="true">Album hình</a></li>
+	                  	<!-- <li><a href="#tab_3" data-toggle="tab" aria-expanded="true">Album hình</a></li> -->
 	                  	<li><a href="#tab_4" data-toggle="tab" aria-expanded="true">SEO</a></li>
 	                </ul>
 	                <div class="tab-content">
@@ -75,47 +75,11 @@
 								      	<label for="ten">Giá bán</label>
 								      	<input type="text" name="txtPrice" onkeyup="FormatNumber(this);"  onKeyPress="return isNumberKey(event)" value="{{ number_format($data->price,0,'',',') }}"  class="form-control" />
 									</div>
-									<div class="form-group">
+									<div class="form-group hidden">
 								      	<label for="ten">Giá cũ</label>
 								      	<input type="text" name="txtPriceOld" onkeyup="FormatNumber(this);"  onKeyPress="return isNumberKey(event)" value="{{ number_format($data->price_old,0,'',',') }}"  class="form-control" />
 									</div>
-									<!-- <div class="form-group">
-								      	<label for="alias">Ghi chú</label>
-								      	
-								      	<textarea name="txtHuongdan" rows="5" id="txtContent" class="form-control">{{ $data->huongdan }}</textarea>
-									</div> -->
-									<style>
-										.list-color{
-											/*display: inline-block;*/
-											float: left;
-											width:50px;
-											margin-right: 10px;
-										}
-										.list-color span{
-											display: table-cell;
-										    width: 43px;
-										    height: 34px;
-										    padding: 0px 20px;
-										    margin-right: 5px;
-										}
-										
-										.box-color{
-											padding-right: 20px;
-										}
-									</style>
-									<div class="form-group">
-										<p><label for="">Chọn màu:</label></p>
-											@foreach($colors as $color)
-											<div class="input-group list-color">
-						                      <div class="input-group-addon box-color">
-												
-						                        <input type="checkbox" name="colors[]" value="{{$color->id}}" @if(in_array($color->id, $color_product)) checked="" @endif class="minimal">
-						                       
-						                      </div>
-						                      <span style="background-color: {{$color->code}};"></span>
-						                    </div>											
-											@endforeach
-									</div>
+									
 								</div>
 								<div class="col-md-6 col-xs-12">
 									<!-- <div class="form-group">

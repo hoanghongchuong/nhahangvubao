@@ -9,7 +9,7 @@ class Book extends Model
     protected $table = 'books';
 
    	protected $fillable = [
-   		'time', 'date', 'numb', 'phone'
+   		'time', 'date', 'numb', 'phone','status'
    	];
     public function getFieldList()
     {

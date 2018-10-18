@@ -163,6 +163,13 @@ Route::group(['middleware' =>'authen', 'prefix' => 'backend'], function(){
 		// Route::get('{id}/delete_list',['as'=>'admin.obill.getDeleteList','uses'=>'Admin\OBillController@getDeleteList']);
 	});
 
+	Route::group(['prefix' => 'book'], function(){
+		Route::get('/', 'Admin\BookController@index')->name('book.index');
+		Route::get('edit/{id}', 'Admin\BookController@getEdit')->name('book.edit');
+		Route::post('edit/{id}', 'Admin\BookController@postEdit')->name('book.postEdit');
+		Route::get('delete/{id}', 'Admin\BookController@delete')->name('book.delete');
+	});
+
 	Route::group(['prefix' => 'newscate'], function(){
 		Route::get('/',['as'=>'admin.newscate.index','uses'=>'Admin\NewsCateController@getDanhSach']);
 		Route::get('add',['as'=>'admin.newscate.getAdd','uses'=>'Admin\NewsCateController@getAdd']);

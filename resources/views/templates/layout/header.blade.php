@@ -1,6 +1,6 @@
 <?php
-    $setting = Cache::get('setting');
-    $cate_news = DB::table('news_categories')->where('status',1)->where('com','tin-tuc')->where('parent_id',0)->get();
+$setting = Cache::get('setting');
+$cate_news = DB::table('news_categories')->where('status', 1)->where('com', 'tin-tuc')->where('parent_id', 0)->get();
 ?>
 <header class="fixed-top top">
     <div class="container">
@@ -16,11 +16,11 @@
             <!-- logo -->
             <a aria-label="Vũ Bảo" href="{{ url('') }}" title=""><img src="{{asset('upload/hinhanh/'.$setting->photo)}}" alt="" title="" class="logo"></a>
             <!-- menu -->
-            <nav id="menu" class="menu-wrap">   
+            <nav id="menu" class="menu-wrap">
                 <ul class="menu medium text-uppercase">
                     <li class="@if(@$com == 'index')active @endif"><a href="{{url('')}}" title="Trang chủ">Trang chủ</a></li>
                     <li class="@if(@$com == 'gioi-thieu')active @endif"><a href="{{url('gioi-thieu')}}" title="Giới thiệu">Giới thiệu</a></li>
-                    <li class="@if(@$com == 'thuc-don')active @endif"><a href="{{url('menu')}}" title="Thực đơn">Thực đơn</a></li>
+                    <li class="@if(@$com == 'san-pham')active @endif"><a href="{{url('menu')}}" title="Thực đơn">Thực đơn</a></li>
                     <li class="@if(@$com == 'khong-gian')active @endif"><a href="{{url('khong-gian')}}" title="Không gian">Không gian</a></li>
                     <li class="@if(@$com == 'khuyen-mai')active @endif"><a href="{{url('khuyen-mai')}}" title="Khuyến mại">Khuyến mãi</a></li>
                     <li class="@if(@$com == 'tin-tuc')active @endif"><a href="#" title="">Tin tức</a>
@@ -39,8 +39,8 @@
                     <a aria-label='Tìm kiếm' href="#" title="" data-toggle="dropdown" class="d-inline-block"><img class="mx-3" src="{{ asset('public/images/search.png')}}" alt="" title=""></a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <div class="dropdown-item d-flex align-items-center cart-top-item">
-                            <form action="" class="search-frm">
-                                <input type="text" required="required" class="form-control" placeholder="Từ khóa tìm kiếm...">
+                            <form action="{{ route('search') }}" method="get" class="search-frm">
+                                <input type="text" required="required" name="txtSearch" class="form-control" placeholder="Từ khóa tìm kiếm...">
                                 <button type="submit" class="btn">Tìm kiếm</button>
                             </form>
                         </div>
@@ -71,22 +71,22 @@
                     <input name="time" type="time" class="form-control time_book" required="required">
                     <label for=""><i class="far fa-clock"></i> Giờ</label>
                 </div>
-            
+
                 <div class="regis-sfrm-group">
                     <input name="date" type="date" class="form-control date_book" required="required">
                     <label for=""><i class="far fa-calendar-alt"></i> Ngày</label>
                 </div>
-            
+
                 <div class="regis-sfrm-group">
                     <input name="quan" type="number" class="form-control numb_book" required="required" >
                     <label for=""><i class="far fa-user"></i> Số lượng</label>
                 </div>
-            
+
                 <div class="regis-sfrm-group">
                     <input name="tel" type="tel" class="form-control phone_book" required="required">
                     <label for=""><i class="fas fa-phone-volume"></i> Số điện thoại</label>
                 </div>
-            
+
                 <div class="text-center">
                     <button class="btn text-uppercase regis-btn">Đặt bàn</button>
                 </div>

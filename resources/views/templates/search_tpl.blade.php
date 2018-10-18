@@ -2,55 +2,65 @@
 @section('content')
 <?php
     $setting = Cache::get('setting');
-    $banner = DB::table('banner_content')->where('position', 2)->first();
+    
 ?>
-<section class="vk-content">
-    <div class="vk-breadcrumb">
-        <nav class="container">
-            <ul class="vk-list vk-list--inline vk-breadcrumb__list">
-                <li class="vk-list__item"><a href="{{url('')}}"><i class="vk-icon fa fa-home"></i> Trang chủ</a></li>
-                <li class="vk-list__item"><a href="#">Tìm kiếm</a></li>
-                
-                <li class="vk-list__item active">{{$search}}</li>
-            </ul>
-        </nav>
-    </div>
-    <!--./vk-breadcrumb-->
+<main class="">
     <div class="container">
-        <div class="row">
-            
-            <div class="col-lg-12 order-0 order-lg-1">
-               
-                <div class="vk-shop__list row">
-                @foreach($data as $item)
-                    <div class="col-sm-6 col-md-4 _item">
-                        <div class="vk-shop-item vk-shop-item--style-3">
-                            <a href="{{url('san-pham/'.$item->alias.'.html')}}" title="{{$item->name}}" class="vk-img vk-img--mw100 ">
-                                <img src="{{asset('upload/product/'.$item->photo)}}" alt="{{$item->name}}" class="vk-img__img">
-                                <span class="_sale">- {{ round(100-($item->price / $item->price_old)*100) }} %</span>
-                            </a>
-                            <div class="vk-shop-item__brief">
-                                <h3 class="vk-shop-item__title"><a href="{{url('san-pham/'.$item->alias.'.html')}}" title="{{$item->name}}">{{$item->name}}</a></h3>
-                                <div class="vk-shop-item__price">{{number_format($item->price)}} đ 
-                                    @if($item->price < $item->price_old)
-                                    <span class="_old">{{number_format($item->price_old)}} đ</span>
-                                    @endif
+        <ul class="list-unstyled bread">
+            <li><a href="index.html" title="">Trang chủ</a></li>
+            <li>Tìm kiếm</li>
+        </ul>
+    </div>
+    <section class="thucdon">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-4 order-sm-1 order-12">
+                    <aside class="menu-aside">
+                        <h1 class="s16 b1 text-white text-uppercase text-center menu-aside-tit">Thực đơn nhà hàng</h1>
+                        <div class="accordion" id="accordionExample">
+                            @foreach($cate_pro as $k=>$cate)
+                            <div class="td-wrap">
+                                <div class="menu-header" id="heading{{$k}}">
+                                  <h2 class="mb-0" data-toggle="collapse" data-target="#collapse{{$k}}">
+                                      {{$cate->name}}
+                                  </h2>
                                 </div>
-                                <div class="vk-shop-item__button">
-                                    <a href="javascript:;" data-id="{{$item->id}}" class="btn-addcartx vk-btn vk-btn--grey-1" title="Thêm vào giỏ"><img src="{{ asset('public/images/icon-3.png')}}" alt=""></a>
-                                    <a href="{{url('san-pham/'.$item->alias.'.html')}}" class="vk-btn vk-btn--grey-1" title="Xem thêm"><i class="ti-search"></i></a>
+                                <div id="collapse{{$k}}" class="collapse" data-parent="#accordionExample">
+                                  <div class="menu-body">
+                                    @if(count($cate->cateChilds) > 0)
+                                    <ul class="list-unstyled menu-list">
+                                        @foreach($cate->cateChilds as $cateChild)
+                                        <li><a href="{{url('menu/'.$cateChild->alias)}}" title="">{{$cateChild->name}}</a></li>
+                                        @endforeach
+                                    </ul>
+                                    @endif
+                                  </div>
                                 </div>
                             </div>
+                            @endforeach
                         </div>
-                    </div>
-                @endforeach                    
+                    </aside>
                 </div>
-                            
-            </div> 
-        </div> 
-    </div> 
-
-    
-
-</section>
+                <div class="col-lg-9 col-md-8 col-sm-8 order-sm-2 order-1">
+                    <div class="row menu-row">
+                        @foreach($data as $item)
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <article class="menu-item text-center">
+                                <figure class="menu-img">
+                                    <a href="#" title="{{$item->name}}"><img src="{{asset('upload/product/'.$item->photo)}}" title="{{$item->name}}" alt="{{$item->name}}"></a>
+                                </figure>                                
+                                <h2 class="t1 s16 text-uppercase sbold d-flex align-items-end justify-content-between mdetail-info">
+                                    <a href="#" title="">{{$item->name}}</a>
+                                    <span>{{ number_format($item->price) }} đ</span>
+                                </h2>
+                            </article>
+                        </div>
+                        @endforeach
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
 @endsection

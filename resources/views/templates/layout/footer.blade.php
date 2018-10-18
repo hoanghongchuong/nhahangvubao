@@ -23,7 +23,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <h2 class="f1 s18 text-uppercase ft-tit">Fanpage</h2>
-                    <img src="{{ asset('public/images/fb.jpg')}}" title="" alt="">
+                    <div class="fb-page" data-href="{{ $setting->facebook }}" data-tabs="timeline" data-width="280px" data-height="200px" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="{{ $setting->facebook }}" class="fb-xfbml-parse-ignore"><a href="{{ $setting->facebook }}">Facebook</a></blockquote></div>
                     <!-- <h3 class="pt-4">Số lượng truy cập: 239750</h3> -->
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-6">
